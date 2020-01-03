@@ -14,13 +14,12 @@ public class Coordinates {
 
     public Coordinates changePosition(char direction) {
         Move move = Move.parse(direction);
-        Move.MoveVector moveVector = move.getMoveVector();
         int newX = this.x;
         int newY = this.y;
-        if (x + moveVector.getX() <= 1 && x + moveVector.getX() >= -1)
-            newX = x + moveVector.getX();
-        if (y + moveVector.getY() <= 1 && y + moveVector.getY() >= -1)
-            newY = y + moveVector.getY();
+        if (x + move.getMoveX() <= 1 && x + move.getMoveX() >= -1)
+            newX = x + move.getMoveX();
+        if (y + move.getMoveX() <= 1 && y + move.getMoveX() >= -1)
+            newY = y + move.getMoveX();
         return new Coordinates(newX, newY);
     }
 

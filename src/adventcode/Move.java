@@ -1,14 +1,26 @@
 package adventcode;
 
 public enum Move {
-    UP(new MoveVector(0,1)),
-    RIGHT(new MoveVector(1,0)),
-    DOWN(new MoveVector(0,-1)),
-    LEFT(new MoveVector(-1,0));
-    
 
-    Move(MoveVector moveVector) {
-        this.moveVector=moveVector;
+    UP(0,1),
+    RIGHT(1,0),
+    DOWN(0,-1),
+    LEFT(-1,0);
+
+    private final int moveX;
+    private final int moveY;
+
+    Move(int moveX, int moveY) {
+        this.moveX = moveX;
+        this.moveY = moveY;
+    }
+
+    public int getMoveX() {
+        return moveX;
+    }
+
+    public int getMoveY() {
+        return moveY;
     }
 
     public static Move parse(char direction) {
@@ -25,27 +37,5 @@ public enum Move {
         }
     }
 
-    private final MoveVector moveVector;
 
-    public static class MoveVector {
-        private final int x;
-        private final int y;
-
-        private MoveVector(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-    }
-
-    public MoveVector getMoveVector() {
-        return moveVector;
-    }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Code {
-    private final List<Integer> code = new ArrayList<>();
+    private final List<Integer> code = new ArrayList<Integer>();
     private Coordinates currentPosition;
     private Coordinates startingPosition;
 
@@ -18,7 +18,7 @@ public class Code {
 
     public void findCodeDigit(String path) {
         Coordinates newPosition = new Coordinates();
-        for(String direction : path.split("")) {
+        for (String direction : path.split("")) {
             newPosition = currentPosition.changePosition(direction);
             currentPosition = newPosition;
         }
@@ -26,30 +26,33 @@ public class Code {
     }
 
     public static Code decode(String inputFileName) {
-        Code code = new Code(new Coordinates(0,0));
+        Code code = new Code(new Coordinates(0, 0));
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFileName));
 
-        String line;
-        List<String> codeLines = new ArrayList<>();
-        while((line = reader.readLine())!=null) {
-            codeLines.add(line);
-        }
-        for(String codeLine:codeLines) {
-            code.findCodeDigit(codeLine);
-        }
-        code.printPassword();
+            String line;
+            List<String> codeLines = new ArrayList<String>();
+            while ((line = reader.readLine()) != null) {
+                codeLines.add(line);
+            }
+            for (String codeLine : codeLines) {
+                code.findCodeDigit(codeLine);
+            }
+
+            reader.close();
+            return code;
         } catch (IOException ex) {
+            System.err.format("Exception occurred trying to read '%s'.", inputFileName);
             ex.printStackTrace();
-        }
-        return code;
-    }
-
-    public void printPassword() {
-        for(Integer digit:code) {
-            System.out.print(digit);
+            return null;
         }
     }
 
-
+    public String printPassword() {
+        StringBuilder sb = new StringBuilder();
+        for (Integer digit : code) {
+            sb.append(digit);
+        }
+        return sb.toString();
+    }
 }

@@ -24,17 +24,16 @@ public enum Move {
     }
 
     public static Move parse(String direction) {
-        switch(direction) {
-            case "U":
-                return UP;
-            case "R":
-                return RIGHT;
-            case "D":
-                return DOWN;
-            case "L":
-                return LEFT;
-            default:throw new IllegalArgumentException(direction);
+        if ("U".equals(direction)) {
+            return UP;
+        } else if ("R".equals(direction)) {
+            return RIGHT;
+        } else if ("D".equals(direction)) {
+            return DOWN;
+        } else if ("L".equals(direction)) {
+            return LEFT;
         }
+        throw new IllegalArgumentException(direction);
     }
 
 

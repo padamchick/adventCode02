@@ -16,19 +16,15 @@ public class Code {
         this.startingPosition = startingPosition;
     }
 
-    public void findCodeDigit(String path, int length) {
+    public void findCodeDigit(String path) {
         Coordinates newPosition = new Coordinates();
-        for(int i=0; i<length; i++) {
-             newPosition= currentPosition.changePosition(path.charAt(i));
-             currentPosition=newPosition;
+        for(String direction : path.split("")) {
+            newPosition = currentPosition.changePosition(direction);
+            currentPosition = newPosition;
         }
         code.add(Keypad.convert(newPosition));
     }
-    public void printPassword() {
-        for(Integer digit:code) {
-            System.out.print(digit);
-        }
-    }
+
     public static Code decode(String inputFileName) {
         Code code = new Code(new Coordinates(0,0));
         try {
@@ -40,13 +36,19 @@ public class Code {
             codeLines.add(line);
         }
         for(String codeLine:codeLines) {
-            code.findCodeDigit(codeLine, codeLine.length());
+            code.findCodeDigit(codeLine);
         }
         code.printPassword();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         return code;
+    }
+
+    public void printPassword() {
+        for(Integer digit:code) {
+            System.out.print(digit);
+        }
     }
 
 

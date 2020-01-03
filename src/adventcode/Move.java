@@ -23,17 +23,17 @@ public enum Move {
         return moveY;
     }
 
-    public static Move parse(char direction) {
+    public static Move parse(String direction) {
         switch(direction) {
-            case 'U':
+            case "U":
                 return UP;
-            case 'R':
+            case "R":
                 return RIGHT;
-            case 'D':
+            case "D":
                 return DOWN;
-            case 'L':
+            case "L":
                 return LEFT;
-            default:throw new IllegalArgumentException();
+            default:throw new IllegalArgumentException(direction);
         }
     }
 
